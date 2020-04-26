@@ -121,17 +121,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zct-Wb-Vgc">
-                                <rect key="frame" x="82" y="438" width="179" height="20.5"/>
+                                <rect key="frame" x="82" y="446" width="179" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vdn-Kt-3aD">
-                                <rect key="frame" x="269" y="438" width="61" height="20.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYg-rC-zpq">
+                                <rect key="frame" x="269" y="439" width="61" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <state key="normal" title="Sign Up"/>
+                                <connections>
+                                    <action selector="onSignUp:" destination="xfw-5e-y6d" eventType="touchUpInside" id="YkF-fP-JaL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -140,13 +142,12 @@
                             <constraint firstItem="2D4-eU-5p2" firstAttribute="leading" secondItem="Bws-zF-a5M" secondAttribute="leading" constant="40" id="AB6-jk-NhC"/>
                             <constraint firstItem="Bws-zF-a5M" firstAttribute="trailing" secondItem="vyM-ej-S8Z" secondAttribute="trailing" constant="40" id="Kzk-bB-WGa"/>
                             <constraint firstItem="Gkd-iW-bNP" firstAttribute="top" secondItem="OpP-3Q-t8Z" secondAttribute="bottom" constant="44" id="PWl-u3-VzJ"/>
-                            <constraint firstItem="zct-Wb-Vgc" firstAttribute="top" secondItem="vyM-ej-S8Z" secondAttribute="bottom" constant="16" id="X4b-Fe-KnP"/>
-                            <constraint firstItem="Vdn-Kt-3aD" firstAttribute="leading" secondItem="zct-Wb-Vgc" secondAttribute="trailing" constant="8" id="Xn0-qi-Ghy"/>
+                            <constraint firstItem="oYg-rC-zpq" firstAttribute="top" secondItem="vyM-ej-S8Z" secondAttribute="bottom" constant="17" id="R1A-9p-yeY"/>
+                            <constraint firstItem="zct-Wb-Vgc" firstAttribute="top" secondItem="vyM-ej-S8Z" secondAttribute="bottom" constant="24" id="X4b-Fe-KnP"/>
                             <constraint firstItem="OpP-3Q-t8Z" firstAttribute="centerX" secondItem="Bws-zF-a5M" secondAttribute="centerX" id="Xpm-1f-Rqp"/>
-                            <constraint firstItem="Vdn-Kt-3aD" firstAttribute="top" secondItem="vyM-ej-S8Z" secondAttribute="bottom" constant="16" id="dVa-TK-so8"/>
-                            <constraint firstItem="Bws-zF-a5M" firstAttribute="trailing" secondItem="Vdn-Kt-3aD" secondAttribute="trailing" constant="84" id="eio-SM-X79"/>
                             <constraint firstItem="vyM-ej-S8Z" firstAttribute="leading" secondItem="Bws-zF-a5M" secondAttribute="leading" constant="40" id="f7f-G5-dl7"/>
                             <constraint firstItem="2D4-eU-5p2" firstAttribute="top" secondItem="Gkd-iW-bNP" secondAttribute="bottom" constant="8" id="lf9-y9-5Ca"/>
+                            <constraint firstItem="oYg-rC-zpq" firstAttribute="leading" secondItem="zct-Wb-Vgc" secondAttribute="trailing" constant="8" id="liM-aQ-uSJ"/>
                             <constraint firstItem="zct-Wb-Vgc" firstAttribute="leading" secondItem="Bws-zF-a5M" secondAttribute="leading" constant="82" id="pTX-yA-cEn"/>
                             <constraint firstItem="Bws-zF-a5M" firstAttribute="trailing" secondItem="2D4-eU-5p2" secondAttribute="trailing" constant="39" id="r37-JB-UXu"/>
                             <constraint firstItem="Gkd-iW-bNP" firstAttribute="leading" secondItem="Bws-zF-a5M" secondAttribute="leading" constant="39" id="tMw-R5-3Gv"/>

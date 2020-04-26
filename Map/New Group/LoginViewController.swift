@@ -25,4 +25,10 @@ class LoginViewController: UIViewController {
         print("Password: \(String(describing: textPassword.text))")
         performSegue(withIdentifier: "goToMap", sender: nil)
     }
+    
+    @IBAction func onSignUp(_ sender: Any) {
+        if let url = URL(string: signupUrl) {
+            UIApplication.shared.open(url)
+        }
+    }
 }
