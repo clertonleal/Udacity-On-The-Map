@@ -9,7 +9,7 @@
 import Foundation
 
 class NetworkHandler {
-    func handleResponse<T: Codable>(data: Data?, response: URLResponse?, error: Error?, success: @escaping (T) -> Void, errorCallback: @escaping (NetworkError) -> Void) {
+    func handleResponse<T: Codable>(data: Data?, response: URLResponse?, error: Error?, success: @escaping (T) -> Void, errorCallback: @escaping (NetworkError) -> Void, scapeData: Int = 0) {
         DispatchQueue.main.async{
             if error != nil {
                 errorCallback(NetworkError(status: 0, error: "Unknow Error"))
@@ -17,7 +17,7 @@ class NetworkHandler {
             }
 
             if let data = data {
-                let range = Range(uncheckedBounds: (5, data.count))
+                let range = Range(uncheckedBounds: (scapeData, data.count))
                 let newData = data.subdata(in: range)
                 print(String(data: newData, encoding: .utf8)!)
 

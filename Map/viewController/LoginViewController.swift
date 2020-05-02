@@ -29,15 +29,16 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func onLogin(_ sender: Any) {
-        if let email = textEmail.text, let password = textPassword.text {
-            UdacityNetwork().doLogin(email: email, password: password, success: { success in
-                self.performSegue(withIdentifier: "goToMap", sender: nil)
-            }, errorCallback: { error in
-                let alert = UIAlertController(title: "Error", message: error.error, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                self.present(alert, animated: true)
-            })
-        }
+        self.performSegue(withIdentifier: "goToMap", sender: nil)
+//        if let email = textEmail.text, let password = textPassword.text {
+//            UdacityNetwork().doLogin(email: email, password: password, success: { success in
+//                self.performSegue(withIdentifier: "goToMap", sender: nil)
+//            }, errorCallback: { error in
+//                let alert = UIAlertController(title: "Error", message: error.error, preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+//                self.present(alert, animated: true)
+//            })
+//        }
     }
     
     @IBAction func onSignUp(_ sender: Any) {

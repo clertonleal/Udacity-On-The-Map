@@ -9,6 +9,7 @@
 import Foundation
 
 class UdacityNetwork {
+    
     func doLogin(email: String, password: String, success: @escaping (LoginResult) -> Void, errorCallback: @escaping (NetworkError) -> Void) {
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "POST"
@@ -18,9 +19,21 @@ class UdacityNetwork {
         request.httpBody = try? JSONEncoder().encode(UdacityUser(email: email, password: password))
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
+            NetworkHandler().handleResponse(data: data, response: response, error: error, success: success, errorCallback: errorCallback, scapeData: 5)
+        }
+        
+        task.resume()
+    }
+    
+    func getLocations(success: @escaping (Locations) -> Void, errorCallback: @escaping (NetworkError) -> Void) {
+        let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
             NetworkHandler().handleResponse(data: data, response: response, error: error, success: success, errorCallback: errorCallback)
         }
         
         task.resume()
     }
+    
 }
