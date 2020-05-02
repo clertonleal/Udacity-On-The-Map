@@ -16,14 +16,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UdacityNetwork().getLocations(success: { locations in
-            self.locations = locations.results
-            self.tableView.reloadData()
-        }, errorCallback: { error in
-            let alert = UIAlertController(title: "Error", message: error.error, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            self.present(alert, animated: true)
-        })
+        loadLocations()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,6 +40,29 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let url = URL(string: locations[indexPath.row].mediaURL) {
             UIApplication.shared.open(url)
         }
+    }
+    
+    @IBAction func onLogout(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func onReload(_ sender: Any) {
+        loadLocations()
+    }
+    
+    @IBAction func onAddLocation(_ sender: Any) {
+        
+    }
+    
+    private func loadLocations() {
+        UdacityNetwork().getLocations(success: { locations in
+            self.locations = locations.results
+            self.tableView.reloadData()
+        }, errorCallback: { error in
+            let alert = UIAlertController(title: "Error", message: error.error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        })
     }
     
 }

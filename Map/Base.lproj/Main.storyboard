@@ -22,8 +22,23 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="On The Map" id="FDq-MC-ngq">
-                                        <barButtonItem key="leftBarButtonItem" title="Item" image="mappin" catalog="system" id="C6V-ak-Nca"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.clockwise" catalog="system" id="B1C-RV-KtY"/>
+                                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="LKo-Bu-wzn">
+                                            <connections>
+                                                <action selector="onLogout:" destination="9pv-A4-QxB" id="ter-H5-gaA"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="Item" image="plus" catalog="system" id="C6V-ak-Nca">
+                                                <connections>
+                                                    <action selector="onAddLocation:" destination="9pv-A4-QxB" id="NjQ-3T-TaH"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Item" image="arrow.clockwise" catalog="system" id="B1C-RV-KtY">
+                                                <connections>
+                                                    <action selector="onReload:" destination="9pv-A4-QxB" id="ZlM-hw-hcc"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -63,8 +78,23 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="On The Map" id="MO8-kg-Dhi">
-                                        <barButtonItem key="leftBarButtonItem" title="Item" image="mappin" catalog="system" id="NOs-QJ-EnX"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.clockwise" catalog="system" id="L0T-2f-e8a"/>
+                                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="9p3-MT-H9z">
+                                            <connections>
+                                                <action selector="onLogout:" destination="8rJ-Kc-sve" id="07O-z8-O0W"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="Item" image="plus" catalog="system" id="NOs-QJ-EnX">
+                                                <connections>
+                                                    <action selector="onAddLocation:" destination="8rJ-Kc-sve" id="kdP-06-lXr"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Item" image="arrow.clockwise" catalog="system" id="L0T-2f-e8a">
+                                                <connections>
+                                                    <action selector="onReload:" destination="8rJ-Kc-sve" id="eXu-6L-Qvl"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -257,7 +287,7 @@
         <image name="list.dash" catalog="system" width="64" height="42"/>
         <image name="location.fill" catalog="system" width="64" height="56"/>
         <image name="map" catalog="system" width="64" height="56"/>
-        <image name="mappin" catalog="system" width="52" height="64"/>
+        <image name="plus" catalog="system" width="64" height="56"/>
         <image name="udacity" width="800" height="800"/>
     </resources>
 </document>

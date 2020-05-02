@@ -19,19 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UdacityNetwork().getLocations(success: { locations in
-            for location in locations.results {
-                let point = MKPointAnnotation()
-                point.title = "\(location.firstName) \(location.lastName)"
-                point.subtitle = location.mediaURL
-                point.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-                self.mapView.addAnnotation(point)
-            }
-        }, errorCallback: { error in
-            let alert = UIAlertController(title: "Error", message: error.error, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            self.present(alert, animated: true)
-        })
+        loadLocations()
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -57,7 +45,33 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    @IBAction func onLogout(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
-
+    @IBAction func onReload(_ sender: Any) {
+        loadLocations()
+    }
+    
+    @IBAction func onAddLocation(_ sender: Any) {
+        
+    }
+    
+    private func loadLocations() {
+        UdacityNetwork().getLocations(success: { locations in
+            for location in locations.results {
+                let point = MKPointAnnotation()
+                point.title = "\(location.firstName) \(location.lastName)"
+                point.subtitle = location.mediaURL
+                point.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+                self.mapView.addAnnotation(point)
+            }
+        }, errorCallback: { error in
+            let alert = UIAlertController(title: "Error", message: error.error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        })
+    }
+    
 }
 
