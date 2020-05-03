@@ -13,13 +13,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
-    override func viewWillAppear(_ animated: Bool) {
-        mapView.delegate = self
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
         loadLocations()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if (UIApplication.shared.delegate as! AppDelegate).shouldReloadMap {
+            loadLocations()
+            (UIApplication.shared.delegate as! AppDelegate).shouldReloadMap = false
+        }
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -46,7 +50,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func onLogout(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        UdacityNetwork().logout(success: {success in
+            self.dismiss(animated: true, completion: nil)
+        }, errorCallback: {error in
+            let alert = UIAlertController(title: "Error", message: error.error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        })
     }
     
     @IBAction func onReload(_ sender: Any) {
@@ -54,6 +64,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func onAddLocation(_ sender: Any) {
+        performSegue(withIdentifier: "addLocation", sender: nil)
         
     }
     

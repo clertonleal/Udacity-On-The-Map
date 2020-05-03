@@ -9,6 +9,6 @@
 import Foundation
 
 struct LoginResult: Codable {
-    let account: Account
+    let account: Account?
     let session: Session
 }

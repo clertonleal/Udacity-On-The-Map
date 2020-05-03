@@ -29,9 +29,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func onLogin(_ sender: Any) {
-        self.performSegue(withIdentifier: "goToMap", sender: nil)
         if let email = textEmail.text, let password = textPassword.text {
             UdacityNetwork().doLogin(email: email, password: password, success: { success in
+                print(success)
                 (UIApplication.shared.delegate as! AppDelegate).user = UdacityUser(email: email, password: password)
                 self.performSegue(withIdentifier: "goToMap", sender: nil)
             }, errorCallback: { error in

@@ -18,6 +18,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         loadLocations()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if (UIApplication.shared.delegate as! AppDelegate).shouldReloadList {
+            loadLocations()
+            (UIApplication.shared.delegate as! AppDelegate).shouldReloadList = false
+        }
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return locations.count
@@ -43,7 +50,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func onLogout(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        UdacityNetwork().logout(success: {success in
+            self.dismiss(animated: true, completion: nil)
+        }, errorCallback: {error in
+            let alert = UIAlertController(title: "Error", message: error.error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        })
     }
     
     @IBAction func onReload(_ sender: Any) {
@@ -51,7 +64,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func onAddLocation(_ sender: Any) {
-        
+        performSegue(withIdentifier: "addLocation", sender: nil)
     }
     
     private func loadLocations() {

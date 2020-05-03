@@ -12,6 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var user: UdacityUser? = nil
+    var shouldReloadList = false
+    var shouldReloadMap = false
 
 }
 
