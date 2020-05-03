@@ -64,8 +64,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func onAddLocation(_ sender: Any) {
-        performSegue(withIdentifier: "addLocation", sender: nil)
-        
+        if let viewController = storyboard?.instantiateViewController(identifier: "newLocation") as? AddLocationViewController {
+            viewController.closeCallback = {
+                self.loadLocations()
+            }
+            present(viewController, animated: true, completion: nil)
+        }
     }
     
     private func loadLocations() {

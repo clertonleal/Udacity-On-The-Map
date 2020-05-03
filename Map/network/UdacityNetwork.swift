@@ -40,7 +40,7 @@ class UdacityNetwork {
        }
     
     func getLocations(success: @escaping (Locations) -> Void, errorCallback: @escaping (NetworkError) -> Void) {
-        let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
+        let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
         
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in

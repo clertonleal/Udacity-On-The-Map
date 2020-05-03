@@ -13,6 +13,7 @@ import MapKit
 class FinishAddLocationViewController: UIViewController, MKMapViewDelegate {
     
     var location: Location! = nil
+    var successCallback: (() -> Void)! = nil
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -46,13 +47,16 @@ class FinishAddLocationViewController: UIViewController, MKMapViewDelegate {
         return annotationView
     }
     
+    @IBAction func onCancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func onFinish(_ sender: Any) {
         UdacityNetwork().createLocation(location: location, success: { success in
             let alert = UIAlertController(title: "Success", message: "Location created", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { success in
-                (UIApplication.shared.delegate as! AppDelegate).shouldReloadList = true
-                (UIApplication.shared.delegate as! AppDelegate).shouldReloadMap = true
                 self.dismiss(animated: true, completion: nil)
+                self.successCallback()
             }))
             self.present(alert, animated: true)
         }, errorCallback: { error in

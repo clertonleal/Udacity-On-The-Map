@@ -29,6 +29,7 @@
 		E4DE7DB4245E1916001B6F52 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DE7DB3245E1916001B6F52 /* AddLocationViewController.swift */; };
 		E4DE7DB6245E2B55001B6F52 /* FinishAddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DE7DB5245E2B55001B6F52 /* FinishAddLocationViewController.swift */; };
 		E4DE7DB8245E3135001B6F52 /* LocationCreated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DE7DB7245E3135001B6F52 /* LocationCreated.swift */; };
+		E4DE7DBA245E7A65001B6F52 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DE7DB9245E7A65001B6F52 /* SpinnerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		E4DE7DB3245E1916001B6F52 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		E4DE7DB5245E2B55001B6F52 /* FinishAddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishAddLocationViewController.swift; sourceTree = "<group>"; };
 		E4DE7DB7245E3135001B6F52 /* LocationCreated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCreated.swift; sourceTree = "<group>"; };
+		E4DE7DB9245E7A65001B6F52 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				E41B8D6F2456021100D51939 /* Assets.xcassets */,
 				E41B8D712456021100D51939 /* LaunchScreen.storyboard */,
 				E41B8D742456021100D51939 /* Info.plist */,
+				E4DE7DB9245E7A65001B6F52 /* SpinnerViewController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				E41B8D8C24563A2400D51939 /* NertworkError.swift in Sources */,
 				E41B8D88245633A400D51939 /* Session.swift in Sources */,
 				E4DE7DAE245DF101001B6F52 /* Locations.swift in Sources */,
+				E4DE7DBA245E7A65001B6F52 /* SpinnerViewController.swift in Sources */,
 				E41B8D6B2456021000D51939 /* ListViewController.swift in Sources */,
 				E41B8D8224562E9900D51939 /* UdacityUser.swift in Sources */,
 				E4DE7DB2245E07EC001B6F52 /* LocationCell.swift in Sources */,

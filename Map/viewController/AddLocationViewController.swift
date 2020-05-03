@@ -15,68 +15,80 @@ class AddLocationViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var adressText: UITextField!
     @IBOutlet weak var linkAdress: UITextField!
     
-    let manager = CLLocationManager()
-    var coordinate: CLLocationCoordinate2D? = nil
+    let geocoder = CLGeocoder()
+    let spinner = SpinnerViewController()
     var location: Location! = nil
+    var closeCallback: (() -> Void)! = nil
     
-    override func viewDidLoad() {
-        manager.delegate = self
-        manager.requestWhenInUseAuthorization()
+    override func viewWillDisappear(_ animated: Bool) {
+        closeCallback()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            coordinate = location.coordinate
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            manager.requestLocation()
-        } else if status == .denied {
-            let alert = UIAlertController(title: "Error", message: "Is necessary grant location permission to use this functionality", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
-                self.dismiss(animated: true, completion: nil)
-            }))
-            self.present(alert, animated: true)
-        }
+    @IBAction func onCancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func onAddLocation(_ sender: Any) {
+        spinner.didMove(toParent: self)
         if let user = (UIApplication.shared.delegate as! AppDelegate).user,
-            let adress = linkAdress.text,
-            let link = adressText.text,
-            let coordinate = coordinate {
+            let adress = adressText.text,
+            let link = linkAdress.text{
             
-            location = Location(firstName: user.udacity.username,
-                                lastName: " ",
-                                longitude: coordinate.longitude,
-                                latitude: coordinate.latitude,
-                                uniqueKey: UUID().uuidString,
-                                mediaURL: adress,
-                                mapString: link)
-            
-            dismiss(animated: true, completion: {
-                
-                let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-                
-                if var topController = keyWindow?.rootViewController {
-                    while let presentedViewController = topController.presentedViewController {
-                        topController = presentedViewController
+            showSpinner()
+            geocoder.geocodeAddressString(adress) { (placemarks, error) in
+                self.hideSpinner()
+
+                if let error = error {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                } else {
+                    var location: CLLocation?
+
+                    if let placemarks = placemarks, placemarks.count > 0 {
+                        location = placemarks.first?.location
                     }
-                    
-                    if let viewController = self.storyboard?.instantiateViewController(identifier: "finish") as? FinishAddLocationViewController {
-                        viewController.location = self.location
-                        topController.present(viewController, animated: true, completion: nil)
+
+                    if let location = location {
+                        self.sendLocation(currentLocation: location, user: user, adress: adress, link: link)
+                    } else {
+                        let alert = UIAlertController(title: "Error", message: "No Matching Location Found", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                        self.present(alert, animated: true)
                     }
                 }
-            })
+            }
+        }
+    }
+    
+    private func showSpinner() {
+        addChild(spinner)
+        spinner.view.frame = view.frame
+        view.addSubview(spinner.view)
+        spinner.didMove(toParent: self)
+    }
+    
+    private func hideSpinner() {
+        spinner.willMove(toParent: nil)
+        spinner.view.removeFromSuperview()
+        spinner.removeFromParent()
+    }
+    
+    private func sendLocation(currentLocation: CLLocation, user: UdacityUser, adress: String, link: String) {
+        location = Location(firstName: user.udacity.username,
+                            lastName: " ",
+                            longitude: currentLocation.coordinate.longitude,
+                            latitude: currentLocation.coordinate.latitude,
+                            uniqueKey: UUID().uuidString,
+                            mediaURL: link,
+                            mapString: adress)
+        
+        if let viewController = self.storyboard?.instantiateViewController(identifier: "finish") as? FinishAddLocationViewController {
+            viewController.location = self.location
+            viewController.successCallback = {
+                self.dismiss(animated: true, completion: nil)
+            }
+            self.present(viewController, animated: true, completion: nil)
         }
     }
 }
